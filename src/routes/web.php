@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TodoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('todos');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/todos', function () {
+//     return view('todos.index');
+// })->middleware(['auth']);
 
 require __DIR__.'/auth.php';
+
+/* Todo一覧表示 */
+Route::get('todos', [TodoController::class, 'index'])->name('todos.index');
+
+/* Todo作成フォーム表示 */
+Route::get('todos/create', [TodoController::class, 'create']);
+
+/* Todo作成処理 */
+Route::post('todos', [TodoController::class, 'store']);
+
+/* Todo詳細表示 */
+Route::get('todos/{id}', [TodoController::class, 'show']);
+
+/* Todo編集フォーム表示 */
+Route::get('todos/{id}/edit', [TodoController::class, 'edit']);
+
+/* Todo更新処理 */
+Route::put('todos/{id}', [TodoController::class, 'update']);
+
+/* Todo削除処理 */
+Route::delete('todos/{id}', [TodoController::class, 'destroy']);
