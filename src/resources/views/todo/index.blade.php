@@ -3,9 +3,9 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 一覧画面
-            </div>
+            </div> -->
             <div class="card-body">
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
